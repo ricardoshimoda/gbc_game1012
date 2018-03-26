@@ -7,23 +7,26 @@ public class PlayerMovement : MonoBehaviour {
 
 	[SerializeField] float rotation;
 	[SerializeField] Renderer flame;
+	[SerializeField] GameObject explosion;
+
 	Rigidbody2D rb;
 	bool thrust = false;
 
 	[SerializeField] int speed;
 
-	[SerializeField] Text lives;
-	[SerializeField] int playerLives;
-
-	[SerializeField] Text score;
-	int playerScore = 0;
+	public static bool exists = false;
 
 	void Start(){
-		playerScore = 0;
-		score.text = "Score: " + playerScore.ToString ();
-		lives.text = "Lives: " + playerLives.ToString ();
-		rb = GetComponent<Rigidbody2D>();
-		flame.enabled = false;
+		if (exists == false) {
+			PlayerData.Instance.Score = 0;
+			PlayerData.Instance.Lives = 11;
+			rb = GetComponent<Rigidbody2D> ();
+			flame.enabled = false;
+			exists = true;
+			DontDestroyOnLoad (this.gameObject);
+		} else {
+			GameObject.Destroy (this.gameObject);
+		}
 	}
 
 	void FixedUpdate() {
@@ -47,23 +50,18 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.tag == "Coin") {
-			playerScore++;
+			PlayerData.Instance.Score++;
 			Destroy (other.gameObject,0);
-			score.text = "Score: " + playerScore.ToString ();
 		}
-		if (other.gameObject.tag == "Portal") {
-			score.text = "Next Level";
-		}
-
 	}
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
 		if (other.gameObject.tag == "Wall") {
-			playerLives--;
-			lives.text = "Lives: " + playerLives.ToString ();
-			if (playerLives == 0) {
-				score.text = "You are dead";
+			PlayerData.Instance.Lives--;
+			if (PlayerData.Instance.Lives == 0) {
+				exists = false;
+				GameObject.Instantiate(explosion, transform.position, transform.rotation);
 				Destroy (gameObject,0);
 			}
 		}

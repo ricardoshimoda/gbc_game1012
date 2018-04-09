@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAME1012_Lab8_NakasakoRicardo", "Assembly-CSharp-firstpass.csproj", "{1BA1A1BC-F8A3-2737-6C49-FBC7B9F32EE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAME1012_Lab8_NakasakoRicardo", "Assembly-CSharp.csproj", "{2D9634E8-F026-6292-50A2-72CD561188D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAME1012_Lab8_NakasakoRicardo", "Assembly-CSharp-Editor-firstpass.csproj", "{720A4001-916A-BB8E-E319-CF1F9BDD04D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BA1A1BC-F8A3-2737-6C49-FBC7B9F32EE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BA1A1BC-F8A3-2737-6C49-FBC7B9F32EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BA1A1BC-F8A3-2737-6C49-FBC7B9F32EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BA1A1BC-F8A3-2737-6C49-FBC7B9F32EE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D9634E8-F026-6292-50A2-72CD561188D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D9634E8-F026-6292-50A2-72CD561188D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D9634E8-F026-6292-50A2-72CD561188D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D9634E8-F026-6292-50A2-72CD561188D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{720A4001-916A-BB8E-E319-CF1F9BDD04D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{720A4001-916A-BB8E-E319-CF1F9BDD04D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{720A4001-916A-BB8E-E319-CF1F9BDD04D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{720A4001-916A-BB8E-E319-CF1F9BDD04D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

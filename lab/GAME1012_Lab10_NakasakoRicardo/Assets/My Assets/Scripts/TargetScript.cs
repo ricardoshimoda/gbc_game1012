@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class TargetScript : MonoBehaviour {
 	[SerializeField] GameObject hitParticle;
@@ -9,10 +10,15 @@ public class TargetScript : MonoBehaviour {
 	Animator targetUpAndDown;
 	bool active = true;
 	AudioSource ping;
+	float targetSpeed = 0.05f;
+	Vector3 initialPosition;
+	bool direction;
 
 	void Start(){
 		targetUpAndDown = GetComponent<Animator>();
 		ping = this.GetComponent<AudioSource> ();
+		Debug.Log ("Getting the initial position");
+		initialPosition = this.transform.position;
 	}
 
 	void OnCollisionEnter(Collision other){
@@ -31,5 +37,23 @@ public class TargetScript : MonoBehaviour {
 		yield return new WaitForSeconds(respawn);
 		active = true;
 		targetUpAndDown.Play ("TargetUp", -1);
-	} 
+	}
+	void Update(){
+		if (active) {
+			if (direction) {
+				this.transform.Translate (-targetSpeed, 0, 0);
+			} else {
+				this.transform.Translate (targetSpeed, 0, 0);
+			}
+			if (Vector3.Distance(this.transform.position, this.initialPosition) > 1.3) {
+				direction = !direction;
+				/* just to avoid going back and forth without stop */
+				if (direction) {
+					this.transform.Translate (-targetSpeed, 0, 0);
+				} else {
+					this.transform.Translate (targetSpeed, 0, 0);
+				}
+			}
+		}
+	}
 }

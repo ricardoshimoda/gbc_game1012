@@ -6,7 +6,22 @@ public class FollowPlayer : MonoBehaviour {
 	[SerializeField] GameObject player;
 	[SerializeField] float movementDamping = 1.0f;
 
+    const float cameraMinX = -15.7f;
+
+    public class Region {
+        float xStart;
+        float xEnd;
+        float yStart;
+        float yEnd;
+        float xConst;
+        float yConst;
+        
+        bool dampX;
+        bool dampY;
+    }
+
 	void Start (){
+
 	}
 
 	void Update(){
@@ -21,18 +36,17 @@ public class FollowPlayer : MonoBehaviour {
 		// Store the camera's z value.
 		// This value will be modified by the next line.
 		float cameraZ = currentPosition.z;
-		float cameraY = int.MinValue;
+		//float cameraY = int.MinValue;
 
 		// store Y value if player is not jumping around
+        /*
 		if (playerData.isGrounded) {
 			cameraY = currentPosition.y;
-		}
+		}*/
 		currentPosition = Vector3.Lerp(currentPosition, player.transform.position, this.movementDamping * Time.deltaTime);
 
 		currentPosition.z = cameraZ;
-		if (playerData.isGrounded) {
-			currentPosition = cameraY;
-		}
+        //currentPosition = cameraY;
 
 		// Update the current position with the smoothed position towards the target object.
 		this.transform.position = currentPosition;

@@ -557,7 +557,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1588571529}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.6, y: 3, z: -10}
+  m_LocalPosition: {x: -15.7, y: 3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -574,6 +574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62bf2d83316f3bd4fa4429886ecf9fde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1676096130}
+  movementDamping: 3
 --- !u!1001 &1676096129
 Prefab:
   m_ObjectHideFlags: 0
@@ -581,6 +583,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114712225664505980, guid: f6c92642fb23d0740bc15a4c54a568fb,
+        type: 2}
+      propertyPath: clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4173010403342764, guid: f6c92642fb23d0740bc15a4c54a568fb, type: 2}
       propertyPath: m_LocalPosition.x
       value: -17.21
@@ -616,7 +623,7 @@ Prefab:
     - target: {fileID: 114712225664505980, guid: f6c92642fb23d0740bc15a4c54a568fb,
         type: 2}
       propertyPath: moveForce
-      value: 5000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 82961788506329678, guid: f6c92642fb23d0740bc15a4c54a568fb,
         type: 2}
@@ -642,9 +649,19 @@ Prefab:
       propertyPath: superJumpForce
       value: 90000
       objectReference: {fileID: 0}
+    - target: {fileID: 114712225664505980, guid: f6c92642fb23d0740bc15a4c54a568fb,
+        type: 2}
+      propertyPath: clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d96fb0abdbd5e264987c3aa250fb65c1, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f6c92642fb23d0740bc15a4c54a568fb, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1676096130 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1335340302076090, guid: f6c92642fb23d0740bc15a4c54a568fb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1676096129}
 --- !u!1 &1769898153
 GameObject:
   m_ObjectHideFlags: 0

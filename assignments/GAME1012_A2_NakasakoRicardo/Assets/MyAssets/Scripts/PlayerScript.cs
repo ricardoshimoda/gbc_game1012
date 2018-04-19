@@ -9,12 +9,13 @@ public class PlayerScript : MonoBehaviour {
 	[SerializeField] float jumpDampening;
 	[SerializeField] float jumpForce;
 	[SerializeField] float superJumpForce;
+	[SerializeField] AudioClip[] clips;
 
 	AudioSource aud;
 	Rigidbody2D rb;
 	float axisH, axisV;
-	bool isGrounded = false;
- 	bool onLadder = false;
+	public bool isGrounded = false;
+    bool onLadder = false;
 	bool isJumping = false;
 	bool isChargingJump = false; 
 	bool isSuperJumping = false;
@@ -108,7 +109,7 @@ public class PlayerScript : MonoBehaviour {
 				isJumping = true;
 				isChargingJump = false;
 				StopCoroutine ("SuperJumpTimer");
-				if (jumpTimer > 2.0f) 
+				if (jumpTimer > 1.5f) 
 					isSuperJumping = true;
 				jumpTimer = 0;
 			}

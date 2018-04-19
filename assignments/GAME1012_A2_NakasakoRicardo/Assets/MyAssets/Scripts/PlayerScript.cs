@@ -37,7 +37,7 @@ public class PlayerScript : MonoBehaviour {
 	}
 	void FixedUpdate(){
 		if (isJumping) {
-			Debug.Log ("applies force to make player jump");
+			//Debug.Log ("applies force to make player jump");
 			// might as well jump!
 			aud.Play ();
 			if (!isSuperJumping) {
@@ -61,12 +61,13 @@ public class PlayerScript : MonoBehaviour {
 			isJumping = false;
 			anim.SetBool ("Jumping", false);
 		}
-		if (other.tag == "ladder") {
+		if (other.tag == "Ladder") {
+            Debug.Log("Ladder activated!");
 			SetLadder (true);
 		}
 	}
 	void OnTriggerExit2D(Collider2D other){
-		if (other.tag == "ladder") {
+		if (other.tag == "Ladder") {
 			SetLadder (false);
 		}
 	}
@@ -78,7 +79,6 @@ public class PlayerScript : MonoBehaviour {
 	void CheckGround (){
 		Collider2D collider = Physics2D.OverlapCircle (groundCheck.position, 0.075f);
 		isGrounded = (collider != null);
-		Debug.Log (isGrounded);
 		if (onLadder)
 			isGrounded = true;
 		anim.SetBool ("Jumping", !isGrounded);
@@ -89,7 +89,7 @@ public class PlayerScript : MonoBehaviour {
 			rb.gravityScale = 0;
 			rb.drag = 15;
 			axisV = Input.GetAxis ("Vertical");
-			anim.SetFloat ("Speed", Mathf.Abs (axisH + axisV));
+            anim.SetFloat ("Speed", Mathf.Abs (axisH + axisV));
 		} else {
 			rb.gravityScale = 3;
 			rb.drag = 5;
@@ -99,13 +99,13 @@ public class PlayerScript : MonoBehaviour {
 
 			/* makes the player charge jump */
 			if (Input.GetKeyDown (KeyCode.Space) && isGrounded && !isChargingJump) {
-				Debug.Log ("Charging Jumping");
+				//Debug.Log ("Charging Jumping");
 				isChargingJump = true;
 				StartCoroutine ("SuperJumpTimer");
 			}
 			/* makes the player really jump */
 			if (Input.GetKeyUp (KeyCode.Space) && isGrounded) {
-				Debug.Log ("Probably really jumping");
+				//Debug.Log ("Probably really jumping");
 				isJumping = true;
 				isChargingJump = false;
 				StopCoroutine ("SuperJumpTimer");
@@ -117,8 +117,8 @@ public class PlayerScript : MonoBehaviour {
 		}
 	}
 	void SetAnimSpeed (){
-		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("mm_climb")) {
-			anim.speed = Mathf.Abs (axisH + axisV);
+		  if (anim.GetCurrentAnimatorStateInfo (0).IsName ("mm_climb")) {
+			anim.speed = Mathf.Abs (axisH )+ Mathf.Abs(axisV);
 		} else if (anim.GetCurrentAnimatorStateInfo (0).IsName ("mm_run")) {
 			anim.speed = Mathf.Abs (axisH);
 		} else {

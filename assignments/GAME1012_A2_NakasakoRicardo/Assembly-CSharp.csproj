@@ -52,13 +52,16 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\MyAssets\Scripts\ButtonScript.cs" />
-     <Compile Include="Assets\MyAssets\Scripts\FollowPlayer.cs" />
+     <Compile Include="Assets\MyAssets\Scripts\FollowPlayerLevel1.cs" />
      <Compile Include="Assets\MyAssets\Scripts\NewBehaviourScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\PlatformScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\SpikeScript.cs" />
  <Reference Include="Facebook.Unity.Settings">
- <HintPath>C:/Users/Tech/Documents/game1012/gbc_game1012/assignments/GAME1012_A2_NakasakoRicardo/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ <HintPath>C:/Projects/GBC/GAME1012/gbc_game1012/assignments/GAME1012_A2_NakasakoRicardo/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ </Reference>
+ <Reference Include="Vuforia.UnityExtensions">
+ <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/VuforiaSupport/Managed/Runtime/Vuforia.UnityExtensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -88,10 +91,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Users/Tech/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
+ <HintPath>C:/Users/rshimoda/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing">
- <HintPath>C:/Users/Tech/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
+ <HintPath>C:/Users/rshimoda/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

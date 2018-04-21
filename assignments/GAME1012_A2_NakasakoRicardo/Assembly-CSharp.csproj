@@ -52,11 +52,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\MyAssets\Scripts\ButtonScript.cs" />
-     <Compile Include="Assets\MyAssets\Scripts\FollowPlayerLevel1.cs" />
-     <Compile Include="Assets\MyAssets\Scripts\NewBehaviourScript.cs" />
+     <Compile Include="Assets\MyAssets\Scripts\DrillScript.cs" />
+     <Compile Include="Assets\MyAssets\Scripts\FollowPlayer.cs" />
      <Compile Include="Assets\MyAssets\Scripts\PlatformScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\PlayerScript.cs" />
-     <Compile Include="Assets\MyAssets\Scripts\SpikeScript.cs" />
+     <Compile Include="Assets\MyAssets\Scripts\PorcupineScript.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>C:/Projects/GBC/GAME1012/gbc_game1012/assignments/GAME1012_A2_NakasakoRicardo/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>

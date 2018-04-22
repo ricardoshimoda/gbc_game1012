@@ -10,10 +10,12 @@ public class PlayerScript : MonoBehaviour {
 	[SerializeField] float jumpForce;
 	[SerializeField] float superJumpForce;
 	[SerializeField] AudioClip[] clips;
+	[SerializeField] float bulletSpeed;
 
 	AudioSource aud;
 	Rigidbody2D rb;
 	float axisH, axisV;
+	float shooting; 
 	public bool isGrounded = false;
     bool onLadder = false;
 	bool isJumping = false;
@@ -32,6 +34,7 @@ public class PlayerScript : MonoBehaviour {
 	void Update () {
 		CheckGround ();
 		DoMoveChecks ();
+		PewPewPew ();
 		SetAnimSpeed ();
 		axisH = Input.GetAxis ("Horizontal");
 	}
@@ -62,7 +65,6 @@ public class PlayerScript : MonoBehaviour {
 			anim.SetBool ("Jumping", false);
 		}
 		if (other.tag == "Ladder") {
-            Debug.Log("Ladder activated!");
 			SetLadder (true);
 		}
 	}
@@ -86,6 +88,7 @@ public class PlayerScript : MonoBehaviour {
 	void DoMoveChecks (){
 		axisH = Input.GetAxis ("Horizontal");
 		if (onLadder) {
+			// when on ladder cannot jump or shoot
 			rb.gravityScale = 0;
 			rb.drag = 15;
 			axisV = Input.GetAxis ("Vertical");
@@ -96,7 +99,6 @@ public class PlayerScript : MonoBehaviour {
 			/* changes the player orientation - where he is looking at */
 			if (axisH < 0) transform.localScale = new Vector3 (1, 1, 1);
 			else if (axisH > 0) transform.localScale = new Vector3 (-1, 1, 1);
-
 			/* makes the player charge jump */
 			if (Input.GetKeyDown (KeyCode.Space) && isGrounded && !isChargingJump) {
 				//Debug.Log ("Charging Jumping");
@@ -109,11 +111,17 @@ public class PlayerScript : MonoBehaviour {
 				isJumping = true;
 				isChargingJump = false;
 				StopCoroutine ("SuperJumpTimer");
-				if (jumpTimer > 1.5f) 
+				if (jumpTimer >= 2f) 
 					isSuperJumping = true;
 				jumpTimer = 0;
 			}
 			anim.SetFloat ("Speed", Mathf.Abs (axisH));
+		}
+	}
+	void PewPewPew(){
+		if (Input.GetAxis ("Fire1") == 1) {
+			
+		} else {
 		}
 	}
 	void SetAnimSpeed (){

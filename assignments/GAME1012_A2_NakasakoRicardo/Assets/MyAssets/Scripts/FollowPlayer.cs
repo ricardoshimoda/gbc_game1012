@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FollowPlayer : MonoBehaviour {
 	[SerializeField] GameObject player;
 	[SerializeField] float movementDamping = 1.0f;
-	[SerializeField] int currentScene;
 
 	Region[][] cameraFieldsForever;
+	int currentScene;
 
     public class Region {
 		/* Limits the region */
@@ -28,6 +29,7 @@ public class FollowPlayer : MonoBehaviour {
     }
 
 	void Start (){
+		currentScene = int.Parse(SceneManager.GetActiveScene().name.Substring(6,1)) - 1;
 		cameraFieldsForever = new Region[][]{
 			/* Level 1 - array 0 */
 			new Region[] {
@@ -71,38 +73,38 @@ public class FollowPlayer : MonoBehaviour {
 					dampY = false,								
 				},
 				new Region(){
-					xStart = 13f, xEnd = 56.11f,
-					yStart = -18f, yEnd = -10f,
+					xStart = 13f, xEnd = 58.11f,
+					yStart = -18f, yEnd = -9f,
 					minX = 14.7f, maxX = 49.4f,
 					dampX = false,
 					dampY = true, yConst = -12.68f,
 				},
 				new Region(){
-					xStart = 46f, xEnd = 56.11f,
+					xStart = 46f, xEnd = 58.11f,
 					yStart = -10f, yEnd = -3f,
 					dampX = true, xConst = 49.4f,
 					dampY = true, yConst = -5.28f,
 				},
 				new Region(){
-					xStart = 40f, xEnd = 56.11f,
+					xStart = 40f, xEnd = 58.11f,
 					yStart = -3f, yEnd = 6f,
 					dampX = true, xConst = 49.4f,
 					dampY = true, yConst = 2f,
 				},
 				new Region(){
-					xStart = 40f, xEnd = 56.11f,
+					xStart = 40f, xEnd = 58.11f,
 					yStart = 6f, yEnd = 13f,
 					dampX = true, xConst = 49.4f,
 					dampY = true, yConst = 11f,
 				},
 				new Region(){
-					xStart = 40f, xEnd = 56.11f,
+					xStart = 40f, xEnd = 58.11f,
 					yStart = 13f, yEnd = 23f,
 					dampX = true, xConst = 49.4f,
 					dampY = true, yConst = 18f,
 				},
 				new Region(){
-					xStart = 40f, xEnd = 56.11f,
+					xStart = 40f, xEnd = 58.11f,
 					yStart = 23f, yEnd = 29f,
 					dampX = true, xConst = 49.4f,
 					dampY = true, yConst = 27f,
@@ -120,13 +122,47 @@ public class FollowPlayer : MonoBehaviour {
 					dampX = false, 
 					dampY = true, yConst = 33f,
 				}
+			},
+			new Region[] {
+				new Region(){
+					xStart = 63f, xEnd = 156f,
+					yStart = 25f, yEnd = 33f,
+					minX = 69.6f, maxX = 151.3f,
+					dampX = false, 
+					dampY = true, yConst = 30.5f,
+				},
+				new Region(){
+					xStart = 151f, xEnd = 156f,
+					yStart = 33f, yEnd = 57f,
+					minY = 40f, maxY = 63.4f,
+					dampX = true, xConst = 151.3f,
+					dampY = false,
+				},
+				new Region(){
+					xStart = 142f, xEnd = 151f,
+					yStart = 33f, yEnd = 57f,
+					minY = 40f, maxY = 63.4f,
+					dampX = true, xConst = 148.3f,
+					dampY = false,
+				},
+				new Region(){
+					xStart = 142f, xEnd = 216f,
+					yStart = 57f, yEnd = 70f,
+					minX = 148.3f, maxX = 209f,
+					dampX = false, //xConst = 148.3f,
+					dampY = true, yConst=63.2f
+				},
 			}
 		};
 	}
 
 	void Update(){
 		// Early out if we don't have a target.
-		if (!player) { return; }
+		if (!player) { 
+			Debug.Log ("CANNOT FIND PLAYER!!!!");
+			return;
+		}
+
 
 		Region[] cameraFieldsScene = cameraFieldsForever[currentScene];
 		Region currentCameraSetup = null;
@@ -142,8 +178,9 @@ public class FollowPlayer : MonoBehaviour {
 				break;
 			}
 		}
-		if (currentCameraSetup == null)
+		if (currentCameraSetup == null) {
 			Debug.Log ("UNMAPPED POSITON!!!!");
+		}
 		// Get the current position of the camera.
 		Vector3 currentPosition = this.transform.position;
 		Vector3 futurePosition = this.transform.position;
@@ -161,10 +198,10 @@ public class FollowPlayer : MonoBehaviour {
 			skipLerp = currentCameraSetup.dampY && currentCameraSetup.dampX;
 			if (currentCameraSetup.dampY) {
 				futurePosition.y = currentCameraSetup.yConst;
-			} else if (currentPosition.y < currentCameraSetup.minY) {
+			} else if (player.transform.position.y < currentCameraSetup.minY) {
 				futurePosition.y = currentCameraSetup.minY;
 				//skipLerp=true;
-			} else if (currentPosition.y > currentCameraSetup.maxY) {
+			} else if (player.transform.position.y > currentCameraSetup.maxY) {
 				//skipLerp=true;
 				futurePosition.y = currentCameraSetup.maxY;
 			} else {

@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 82961788506329678}
   m_Layer: 0
   m_Name: PlayerPrefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1335340302076090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.21, y: 0.29, z: 0.038085938}
+  m_LocalPosition: {x: -21.7, y: 1.4, z: 0.038085938}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4083675110475044}
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1251110648198876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.85, z: 0}
+  m_LocalPosition: {x: 0, y: -0.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4173010403342764}
@@ -114,8 +114,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 0.9771721
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -149,7 +149,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d96fb0abdbd5e264987c3aa250fb65c1, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -228,7 +228,7 @@ Animator:
   m_GameObject: {fileID: 1335340302076090}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: af1788c8552ddc6449e4875e307d0463, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -266,10 +266,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 4379242076040284}
   anim: {fileID: 95560395285789762}
-  moveForce: 2000
+  moveForce: 3000
   jumpDampening: 2
-  jumpForce: 55000
-  superJumpForce: 90000
+  jumpForce: 95000
+  superJumpForce: 180000
+  clips:
+  - {fileID: 8300000, guid: d96fb0abdbd5e264987c3aa250fb65c1, type: 3}
+  - {fileID: 8300000, guid: 8aae48575ca4e4f458d77d2cbd0afff2, type: 3}
+  - {fileID: 8300000, guid: a6dda5409df829549955f76224a23c2f, type: 3}
+  bulletSpeed: 0
+  isGrounded: 0
 --- !u!212 &212006227824393998
 SpriteRenderer:
   m_ObjectHideFlags: 1

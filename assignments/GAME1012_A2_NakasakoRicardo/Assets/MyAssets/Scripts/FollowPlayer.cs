@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class FollowPlayer : MonoBehaviour {
-	[SerializeField] GameObject player;
+
+	static bool CamExists = false;
+	
 	[SerializeField] float movementDamping = 1.0f;
 
+	GameObject player;
 	Region[][] cameraFieldsForever;
 	int currentScene;
 
@@ -29,7 +32,14 @@ public class FollowPlayer : MonoBehaviour {
     }
 
 	void Start (){
-		currentScene = int.Parse(SceneManager.GetActiveScene().name.Substring(6,1)) - 1;
+		if (!CamExists) {
+			DontDestroyOnLoad (this.gameObject);
+			CamExists = true;
+		} else {
+			Destroy (this.gameObject);
+		}
+
+		player = GameObject.FindGameObjectWithTag ("Player");
 		cameraFieldsForever = new Region[][]{
 			/* Level 1 - array 0 */
 			new Region[] {
@@ -123,11 +133,12 @@ public class FollowPlayer : MonoBehaviour {
 					dampY = true, yConst = 33f,
 				}
 			},
+			/* Here begins Level2 */
 			new Region[] {
 				new Region(){
 					xStart = 63f, xEnd = 156f,
 					yStart = 25f, yEnd = 33f,
-					minX = 69.6f, maxX = 151.3f,
+					minX = 71.5f, maxX = 151.3f,
 					dampX = false, 
 					dampY = true, yConst = 30.5f,
 				},
@@ -162,6 +173,8 @@ public class FollowPlayer : MonoBehaviour {
 			Debug.Log ("CANNOT FIND PLAYER!!!!");
 			return;
 		}
+		currentScene = int.Parse(SceneManager.GetActiveScene().name.Substring(6,1)) - 1;
+                 			Debug.Log (currentScene);
 		Region[] cameraFieldsScene = cameraFieldsForever[currentScene];
 		Region currentCameraSetup = null;
 		Vector3 playerPosition = player.transform.position;

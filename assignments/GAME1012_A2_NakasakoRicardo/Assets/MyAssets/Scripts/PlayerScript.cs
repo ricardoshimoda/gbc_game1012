@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
+
+	public static bool exists = false;
+
 	[SerializeField] Transform groundCheck;
 	[SerializeField] Animator anim;
 	[SerializeField] float moveForce;
@@ -32,10 +35,21 @@ public class PlayerScript : MonoBehaviour {
 	bool isInvulnerable = false;
 	bool isAlive = true;
 
-	// Use this for initialization
 	void Start () {
-		rb = GetComponent<Rigidbody2D> ();
-		aud = GetComponent<AudioSource> ();
+		/*
+		 * The following code deals with level transition between two different scenes 
+		 */
+		if (!exists) {
+			PlayerData.Instance.MaxAmmo ();
+			PlayerData.Instance.MaxLives ();
+			rb = GetComponent<Rigidbody2D> ();
+			aud = GetComponent<AudioSource> ();
+			exists = true;
+			DontDestroyOnLoad (this.gameObject);
+		} else {
+			GameObject.Destroy (this.gameObject);
+		}
+
 	}
 	
 	// Update is called once per frame
@@ -71,7 +85,6 @@ public class PlayerScript : MonoBehaviour {
 		}
 	}
 	void Hurt(){
-		Debug.Log ("what?");
 		PlayerData.Instance.Lives--;
 		if (PlayerData.Instance.Lives == 0) {
 			isAlive = false;
@@ -84,12 +97,18 @@ public class PlayerScript : MonoBehaviour {
 		}
 	}
 	void Instadeath(){
-		Debug.Log ("who?");
 		PlayerData.Instance.Lives = 0;
 		isAlive = false;
 		anim.SetBool ("Death", true);
 		aud.clip = clips [2];
 		aud.Play ();
+	}
+	void OceanicAirines(){
+		PlayerData.Instance.Lives = 0;
+		isAlive = false;
+		aud.clip = clips [2];
+		aud.Play ();
+		Destroy (this.gameObject,0.2f);
 	}
 	void OnCollisionStay2D(Collision2D other){
 		if (other.gameObject.tag == "Enemy" && !isInvulnerable) {
@@ -99,6 +118,9 @@ public class PlayerScript : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D other){
 		if (other.tag == "Spikes" && isAlive) {
 			Instadeath();
+		}
+		if (other.tag == "Ether" && isAlive) {
+			OceanicAirines ();
 		}
 	}
 	void OnTriggerEnter2D(Collider2D other){

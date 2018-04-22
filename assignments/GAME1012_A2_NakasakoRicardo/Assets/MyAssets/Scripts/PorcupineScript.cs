@@ -8,11 +8,13 @@ public class PorcupineScript : MonoBehaviour {
 	[SerializeField] float vulnerableTime;
 	Animator anim;
 
-	Transform playerLoc;
+	Transform playerLoc = null;
 	int lives = 3;
 
 	void Start () {
-		playerLoc = GameObject.FindGameObjectWithTag("Player").transform;
+		GameObject player = GameObject.FindGameObjectWithTag ("Player");
+		if(player!= null)
+			playerLoc =player.transform;
 		aud = this.GetComponent<AudioSource> ();
 		anim = this.GetComponent<Animator> ();
 		StartCoroutine ("TurnInvulnerable");
@@ -20,9 +22,10 @@ public class PorcupineScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		float dist = Vector3.Distance(playerLoc.position, this.transform.position);
-		aud.volume = 1 - Mathf.Clamp (dist, 0, 10) / 10;
-
+		if (playerLoc != null) {
+			float dist = Vector3.Distance(playerLoc.position, this.transform.position);
+			aud.volume = 1 - Mathf.Clamp (dist, 0, 10) / 10;
+		}
 	}
 
 	void Snikt(){

@@ -6,18 +6,23 @@ public class DrillScript : MonoBehaviour {
 	[SerializeField] AudioSource aud;
 	[SerializeField] AudioClip[] clips;
 
-	Transform playerLoc;
+	Transform playerLoc=null;
 
 	// Use this for initialization
 	void Start () {
 		aud = this.GetComponent<AudioSource> ();
-		playerLoc = GameObject.FindGameObjectWithTag("Player").transform;
+		GameObject player = GameObject.FindGameObjectWithTag ("Player");
+		if(player != null)
+			playerLoc = player.transform;
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float dist = Vector3.Distance(playerLoc.position, this.transform.position);
-		aud.volume = 1 - Mathf.Clamp(dist, 0, 10)/10;
+		if (playerLoc != null) {
+			float dist = Vector3.Distance (playerLoc.position, this.transform.position);
+			aud.volume = 1 - Mathf.Clamp (dist, 0, 10) / 10;
+		}
 	}
 
 	void SetDown(int i){

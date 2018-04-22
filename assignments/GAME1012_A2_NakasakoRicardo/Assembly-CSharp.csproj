@@ -51,18 +51,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AmmoPowerupScript.cs" />
-     <Compile Include="Assets\LifePowerupScript.cs" />
+     <Compile Include="Assets\MyAssets\Scripts\AmmoPowerupScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\BossStarter.cs" />
      <Compile Include="Assets\MyAssets\Scripts\BulletScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\ButtonScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\DrillScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\FollowPlayer.cs" />
      <Compile Include="Assets\MyAssets\Scripts\GameUIScript.cs" />
+     <Compile Include="Assets\MyAssets\Scripts\LifePowerupScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\PlatformScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\PlayerData.cs" />
      <Compile Include="Assets\MyAssets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\PorcupineScript.cs" />
+     <Compile Include="Assets\MyAssets\Scripts\PortalToLevelTwo.cs" />
      <Compile Include="Assets\MyAssets\Scripts\SlidingDoorScript.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>C:/Projects/GBC/GAME1012/gbc_game1012/assignments/GAME1012_A2_NakasakoRicardo/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>

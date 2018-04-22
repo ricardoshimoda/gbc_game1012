@@ -162,8 +162,6 @@ public class FollowPlayer : MonoBehaviour {
 			Debug.Log ("CANNOT FIND PLAYER!!!!");
 			return;
 		}
-
-
 		Region[] cameraFieldsScene = cameraFieldsForever[currentScene];
 		Region currentCameraSetup = null;
 		Vector3 playerPosition = player.transform.position;
@@ -188,14 +186,9 @@ public class FollowPlayer : MonoBehaviour {
 		// Store the camera's z value.
 		// This value will be modified by the next line.
 		float cameraZ = currentPosition.z;
-		float? cameraY=null;
-		float? cameraX=null;
-
-		bool skipLerp = false;
 
 		// If camera setup has been identified then applies the conditions
 		if (currentCameraSetup != null) {
-			skipLerp = currentCameraSetup.dampY && currentCameraSetup.dampX;
 			if (currentCameraSetup.dampY) {
 				futurePosition.y = currentCameraSetup.yConst;
 			} else if (player.transform.position.y < currentCameraSetup.minY) {

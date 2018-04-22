@@ -11,6 +11,11 @@ public class PlayerScript : MonoBehaviour {
 	[SerializeField] float superJumpForce;
 	[SerializeField] AudioClip[] clips;
 	[SerializeField] float bulletSpeed;
+	[SerializeField] GameObject bulletPrefab;
+	[SerializeField] float respawnBullet;
+	[SerializeField] Transform bulletSpawn;
+	[SerializeField] float bulletForce;
+	[SerializeField] float invulnerability;
 
 	AudioSource aud;
 	Rigidbody2D rb;
@@ -23,6 +28,9 @@ public class PlayerScript : MonoBehaviour {
 	bool isSuperJumping = false;
 	float jumpTimer = 0;
 	const bool doomsday = false;
+	bool canFire = true;
+	bool isInvulnerable = false;
+	bool isAlive = true;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +40,8 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (!isAlive)
+			return;
 		CheckGround ();
 		DoMoveChecks ();
 		PewPewPew ();
@@ -42,6 +52,7 @@ public class PlayerScript : MonoBehaviour {
 		if (isJumping) {
 			//Debug.Log ("applies force to make player jump");
 			// might as well jump!
+			aud.clip=clips[0];
 			aud.Play ();
 			if (!isSuperJumping) {
 				rb.AddForce (new Vector2 (0, jumpForce * Time.fixedDeltaTime));
@@ -59,6 +70,37 @@ public class PlayerScript : MonoBehaviour {
 			rb.AddForce (new Vector2 (axisH * (isGrounded?moveForce:moveForce/jumpDampening) * Time.fixedDeltaTime, 0));
 		}
 	}
+	void Hurt(){
+		Debug.Log ("what?");
+		PlayerData.Instance.Lives--;
+		if (PlayerData.Instance.Lives == 0) {
+			isAlive = false;
+			anim.SetBool ("Death", true);
+			aud.clip = clips [2];
+			aud.Play ();
+		} else {
+			isInvulnerable = true;
+			StartCoroutine (ResetImmortality ());
+		}
+	}
+	void Instadeath(){
+		Debug.Log ("who?");
+		PlayerData.Instance.Lives = 0;
+		isAlive = false;
+		anim.SetBool ("Death", true);
+		aud.clip = clips [2];
+		aud.Play ();
+	}
+	void OnCollisionStay2D(Collision2D other){
+		if (other.gameObject.tag == "Enemy" && !isInvulnerable) {
+			Hurt ();
+		}
+	}
+	void OnTriggerStay2D(Collider2D other){
+		if (other.tag == "Spikes" && isAlive) {
+			Instadeath();
+		}
+	}
 	void OnTriggerEnter2D(Collider2D other){
 		if (isJumping) {
 			isJumping = false;
@@ -67,6 +109,11 @@ public class PlayerScript : MonoBehaviour {
 		if (other.tag == "Ladder") {
 			SetLadder (true);
 		}
+	}
+
+	IEnumerator ResetImmortality(){
+		yield return new WaitForSeconds(invulnerability);
+		isInvulnerable = false;
 	}
 	void OnTriggerExit2D(Collider2D other){
 		if (other.tag == "Ladder") {
@@ -119,10 +166,22 @@ public class PlayerScript : MonoBehaviour {
 		}
 	}
 	void PewPewPew(){
-		if (Input.GetAxis ("Fire1") == 1) {
-			
+		if (Input.GetAxis ("Fire1") == 1 && canFire && PlayerData.Instance.Ammo > 0) {
+			GameObject bulletInst = Instantiate (bulletPrefab, bulletSpawn.position, bulletSpawn.rotation) as GameObject;
+			bulletInst.GetComponent<Rigidbody2D> ().AddForce (Vector2.left * transform.localScale.x * bulletForce * Time.deltaTime);
+			aud.clip = clips [1];
+			aud.Play ();
+			canFire = false;
+			StartCoroutine ("ResetGun");
+			anim.SetBool ("Shooting", true);
+			PlayerData.Instance.Ammo--;
 		} else {
+			anim.SetBool ("Shooting", false);
 		}
+	}
+	IEnumerator ResetGun(){
+		yield return new WaitForSeconds(respawnBullet);
+		canFire = true;
 	}
 	void SetAnimSpeed (){
 		  if (anim.GetCurrentAnimatorStateInfo (0).IsName ("mm_climb")) {

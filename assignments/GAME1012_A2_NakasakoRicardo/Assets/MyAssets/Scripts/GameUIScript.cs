@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameUIScript : MonoBehaviour {
 	[SerializeField] Text ammo;
 	[SerializeField] Image[] lives; 
+	[SerializeField] Text gameOver;
 
 	public static GameUIScript instance;
 
@@ -23,6 +24,9 @@ public class GameUIScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (PlayerData.Instance.Lives == 0) {
+			gameOver.enabled = true;
+		}
 		ammo.text = "X " + PlayerData.Instance.Ammo;
 		for (int i = 0; i < lives.Length; i++) {
 			lives [i].enabled = false;

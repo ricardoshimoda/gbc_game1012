@@ -8,8 +8,8 @@ AnimatorController:
   m_Name: porcupineAnim
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: PlayerDistance
-    m_Type: 1
+  - m_Name: Vulnerable
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -34,8 +34,8 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: PlayerDistance
+  - m_ConditionMode: 1
+    m_ConditionEvent: Vulnerable
     m_EventTreshold: 10
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102065809257723092}
@@ -58,8 +58,8 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: PlayerDistance
+  - m_ConditionMode: 2
+    m_ConditionEvent: Vulnerable
     m_EventTreshold: 10
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102153212974945594}

@@ -21,7 +21,8 @@ public class DrillScript : MonoBehaviour {
 	}
 
 	void SetDown(int i){
+		/*
 		aud.clip = clips [i];
-		aud.Play();
+		aud.Play();*/
 	}
 }

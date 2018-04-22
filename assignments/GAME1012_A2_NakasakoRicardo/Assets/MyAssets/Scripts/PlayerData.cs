@@ -4,8 +4,8 @@ using System.Collections;
 public class PlayerData 
 {
 	private static PlayerData instance = null;
-	private int lives = 2;
-	private int ammo = 15;
+	private int lives = 4;
+	private int ammo = 25;
 
 	public static PlayerData Instance
 	{

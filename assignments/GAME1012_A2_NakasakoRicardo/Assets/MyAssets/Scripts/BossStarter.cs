@@ -7,13 +7,17 @@ public class BossStarter : MonoBehaviour {
 	[SerializeField] Animator animFinishDoor;
 	[SerializeField] Animator garfield;
 
-	// Use this for initialization
-	void Start () {
-		
+	void Update(){
+		if (garfield == null) {
+			animFinishDoor.SetBool ("Open", true);
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	void OnTriggerEnter2D(Collider2D other){
+		Debug.Log (other.tag);
+		if (other.tag == "Player" && animStartDoor.GetBool("Open")) {
+			animStartDoor.SetBool ("Open", false);
+			garfield.SetBool ("PlayerArrived", true);
+		}
 	}
+
 }

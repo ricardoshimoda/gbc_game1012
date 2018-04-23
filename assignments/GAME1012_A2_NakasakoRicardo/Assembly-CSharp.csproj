@@ -57,7 +57,9 @@
      <Compile Include="Assets\MyAssets\Scripts\ButtonScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\DrillScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\FollowPlayer.cs" />
+     <Compile Include="Assets\MyAssets\Scripts\FurballScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\GameUIScript.cs" />
+     <Compile Include="Assets\MyAssets\Scripts\GarfieldScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\LifePowerupScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\PlatformScript.cs" />
      <Compile Include="Assets\MyAssets\Scripts\PlayerData.cs" />

@@ -19,8 +19,9 @@ public class ButtonScript : MonoBehaviour {
 	void OnCollisionExit2D(Collision2D other){
 		if (other.gameObject.tag == "Player" && anim.GetBool ("Open")) {
 			/* closes the door when player no longer in the platform */
-			anim.SetBool ("Open", false);
-			aud.Play ();
+			// TOO Difficult for me to test
+			//anim.SetBool ("Open", false);
+			//aud.Play ();
 		}
 	}
 	void OnCollisionStay2D(Collision2D other){

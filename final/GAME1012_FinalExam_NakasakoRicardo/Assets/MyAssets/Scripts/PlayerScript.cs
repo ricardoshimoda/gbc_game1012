@@ -114,6 +114,11 @@ public class PlayerScript : MonoBehaviour {
 		if (other.gameObject.tag == "Enemy" && !isInvulnerable) {
 			Hurt ();
 		}
+		if (other.gameObject.tag == "FBullet" && !isInvulnerable) {
+			Hurt ();
+			if(isAlive)
+				Hurt ();
+		}
 	}
 	void OnTriggerStay2D(Collider2D other){
 		if (other.tag == "Spikes" && isAlive) {

@@ -12,6 +12,7 @@ TagManager:
   - Fire
   - Ground
   - FinalBoss
+  - FBullet
   layers:
   - Default
   - TransparentFX
